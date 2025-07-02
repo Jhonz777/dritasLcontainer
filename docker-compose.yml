@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: apialura
+    ports:
+      - "8000:8000"
+    volumes:
+      # Monta o diretório atual no contêiner para desenvolvimento com hot-reload.
+      # O banco de dados SQLite (escola.db) também será salvo na sua máquina local.
+      - .:/app
+    # Sobrescreve o CMD do Dockerfile para ativar o modo de recarregamento.
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
